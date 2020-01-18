@@ -1,0 +1,24 @@
+*.class
+*.log
+*.jar
+*.war
+.metadata
+
+# Eclipse
+*/.classpath
+*/.project
+*/.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*/stale_outputs_checked
+
+# Mac
+.DS_Store
+
+# Maven
+*/log/
+*/target/
+*/bin/
