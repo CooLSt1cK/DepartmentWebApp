@@ -10,7 +10,7 @@ public class Employee extends Entity {
     private String name;
     private String birthday;
     private Integer payment;
-    private Integer department_id;
+    private Integer departmentId;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public class Employee extends Entity {
                 ", name='" + name + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", payment=" + payment +
-                ", department_id=" + department_id +
+                ", department_id=" + departmentId +
                 '}';
     }
 
@@ -56,11 +56,11 @@ public class Employee extends Entity {
         this.payment = payment;
     }
 
-    public Integer getDepartment_id() {
-        return department_id;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment_id(Integer department_id) {
-        this.department_id = department_id;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 }
