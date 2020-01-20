@@ -1,10 +1,5 @@
-package com.aleksieienko.entity;
+package com.aleksieienko.departmentWebApp.entity;
 
-/**
- * Created on 19.01.2020
- *
- * @author K.Aleksieienko
- */
 public abstract class Entity {
     public Integer id;
 
