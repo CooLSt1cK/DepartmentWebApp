@@ -1,4 +1,4 @@
-package com.aleksieienko.departmentWebApp.db;
+package com.aleksieienko.department.web.app.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

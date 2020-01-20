@@ -1,6 +1,6 @@
-package com.aleksieienko.departmentWebApp.db.dao;
+package com.aleksieienko.department.web.app.db.dao;
 
-import com.aleksieienko.departmentWebApp.entity.Entity;
+import com.aleksieienko.department.web.app.entity.Entity;
 
 import java.sql.ResultSet;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.aleksieienko.departmentWebApp.entity;
+package com.aleksieienko.department.web.app.entity;
 
 public class Employee extends Entity {
     private String email;

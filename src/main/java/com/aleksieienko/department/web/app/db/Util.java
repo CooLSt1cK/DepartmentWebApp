@@ -1,4 +1,4 @@
-package com.aleksieienko.departmentWebApp.db;
+package com.aleksieienko.department.web.app.db;
 
 public class Util {
     public static final String SQL__SELECT_DEPARTMENT = "SELECT * FROM department";

@@ -1,4 +1,4 @@
-package com.aleksieienko.departmentWebApp.db;
+package com.aleksieienko.department.web.app.db;
 
 public class Fields {
     public static final String DEPARTMENT__ID = "id";

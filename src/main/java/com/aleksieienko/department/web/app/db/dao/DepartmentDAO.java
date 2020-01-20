@@ -1,10 +1,10 @@
-package com.aleksieienko.departmentWebApp.db.dao;
+package com.aleksieienko.department.web.app.db.dao;
 
-import com.aleksieienko.departmentWebApp.db.DBManager;
-import com.aleksieienko.departmentWebApp.db.Fields;
-import com.aleksieienko.departmentWebApp.db.Util;
-import com.aleksieienko.departmentWebApp.entity.Department;
-import com.aleksieienko.departmentWebApp.entity.Entity;
+import com.aleksieienko.department.web.app.db.DBManager;
+import com.aleksieienko.department.web.app.db.Fields;
+import com.aleksieienko.department.web.app.db.Util;
+import com.aleksieienko.department.web.app.entity.Department;
+import com.aleksieienko.department.web.app.entity.Entity;
 
 import java.sql.*;
 import java.util.ArrayList;

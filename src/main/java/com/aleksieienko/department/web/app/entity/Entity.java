@@ -1,7 +1,7 @@
-package com.aleksieienko.departmentWebApp.entity;
+package com.aleksieienko.department.web.app.entity;
 
 public abstract class Entity {
-    public Integer id;
+    private Integer id;
 
     @Override
     public String toString() {
