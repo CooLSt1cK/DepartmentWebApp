@@ -1,22 +1,36 @@
 package com.aleksieienko.department.web.app.entity;
 
-public class Employee extends Entity {
+import java.time.LocalDate;
+
+public class Employee {
+    private Integer id;
+
+
+
     private String email;
     private String name;
-    private String birthday;
+    private LocalDate birthday;
     private Integer payment;
     private Integer departmentId;
 
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + getId() +
+                "id=" + id +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", payment=" + payment +
                 ", department_id=" + departmentId +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -35,11 +49,11 @@ public class Employee extends Entity {
         this.name = name;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
