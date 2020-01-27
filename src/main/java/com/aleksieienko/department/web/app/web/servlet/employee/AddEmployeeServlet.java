@@ -18,13 +18,11 @@ public class AddEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
         req.getRequestDispatcher(Paths.ADD_EMPLOYEE_JSP).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = (Integer) req.getSession().getAttribute(AttributeNames.DEPARTMENT_ID);
         String email = req.getParameter("email");
         String name = req.getParameter("name");

@@ -30,9 +30,9 @@ public class DeleteEmployeeServlet extends HttpServlet {
         if (!employeeService.delete(id)) {
             req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Employee is not exist");
             resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+        } else {
+            req.getSession().setAttribute(AttributeNames.EMPLOYEE_BY_ID, null);
+            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET);
         }
-        req.getSession().setAttribute(AttributeNames.EMPLOYEE_BY_ID, null);
-        resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET);
-
     }
 }

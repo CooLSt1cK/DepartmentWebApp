@@ -36,8 +36,9 @@ public class UpdateEmployeeServlet extends HttpServlet {
         if (!employeeService.update(id, email, name, birthday, payment, departmentId)) {
             req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or employee's email like this already exist");
             resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+        } else {
+            req.getSession().setAttribute(AttributeNames.EMPLOYEE_BY_ID, null);
+            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET);
         }
-        req.getSession().setAttribute(AttributeNames.EMPLOYEE_BY_ID, null);
-        resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET);
     }
 }
