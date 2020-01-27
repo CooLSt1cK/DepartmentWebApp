@@ -30,8 +30,9 @@ public class DeleteDepartmentServlet extends HttpServlet {
         if (!departmentService.delete(id)) {
             req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Department is not exist");
             resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+        } else {
+            req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, null);
+            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
-        req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, null);
-        resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
     }
 }

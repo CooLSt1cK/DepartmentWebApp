@@ -31,8 +31,9 @@ public class UpdateDepartmentServlet extends HttpServlet {
         if (!departmentService.update(id, name)) {
             req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
             resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+        } else {
+            req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, null);
+            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
-        req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, null);
-        resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
     }
 }
