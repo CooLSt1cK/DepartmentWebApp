@@ -1,3 +1,3 @@
-db.url = jdbc:mysql://localhost/st_shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+db.url = jdbc:mysql://localhost/departments?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 db.user = root
 db.password =

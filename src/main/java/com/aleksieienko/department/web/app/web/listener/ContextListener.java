@@ -1,4 +1,4 @@
-package com.aleksieienko.department.web.app.web.lestener;
+package com.aleksieienko.department.web.app.web.listener;
 
 import com.aleksieienko.department.web.app.Paths;
 import com.aleksieienko.department.web.app.PropertyNames;
@@ -12,16 +12,20 @@ import com.aleksieienko.department.web.app.service.EmployeeService;
 import com.aleksieienko.department.web.app.service.impl.DepartmentServiceImpl;
 import com.aleksieienko.department.web.app.service.impl.EmployeeServiceImpl;
 import com.aleksieienko.department.web.app.web.AttributeNames;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        //do nothing
+    }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -36,7 +40,7 @@ public class ContextListener implements ServletContextListener {
             //Department service
             DepartmentDao departmentDao = new DepartmentDaoImpl(dbManager);
             DepartmentService departmentService = new DepartmentServiceImpl(departmentDao);
-            sce.getServletContext().setAttribute(AttributeNames.DEPARTMENT_LIST, departmentDao.getAll());
+            sce.getServletContext().setAttribute(AttributeNames.DEPARTMENT_LIST, departmentService.getAll());
             sce.getServletContext().setAttribute(AttributeNames.DEPARTMENT_SERVICE, departmentService);
             //Employee service
             EmployeeDao employeeDao = new EmployeeDaoImpl(dbManager);

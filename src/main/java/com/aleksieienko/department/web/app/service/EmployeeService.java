@@ -1,21 +1,18 @@
 package com.aleksieienko.department.web.app.service;
 
 import com.aleksieienko.department.web.app.entity.Employee;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public interface EmployeeService {
     List<Employee> getAll();
 
-    Employee get(Integer id);
+    Employee getById(Integer id);
 
-    List<Employee> getForDepartment(Integer id);
+    List<Employee> getByDepartmentId(Integer id);
 
-    boolean add(String email, String name, LocalDate birthday, Integer payment, Integer departmentId);
+    boolean add(Employee employee);
 
-    boolean update(Integer id, String email, String name,
-                   LocalDate birthday, Integer payment, Integer departmentId);
+    boolean update(Employee employee);
 
-    boolean delete(Integer id);
+    boolean deleteById(Integer id);
 }

@@ -20,7 +20,7 @@ public class DBManager {
             con.rollback();
             con.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -29,7 +29,7 @@ public class DBManager {
             con.commit();
             con.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class DBManager {
             con = DriverManager.getConnection(url, userName, password);
             con.setAutoCommit(false);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
         return con;
     }

@@ -1,17 +1,16 @@
 package com.aleksieienko.department.web.app.service;
 
 import com.aleksieienko.department.web.app.entity.Department;
-
 import java.util.List;
 
 public interface DepartmentService {
     List<Department> getAll();
 
-    Department get(Integer id);
+    Department getById(Integer id);
 
-    boolean add(String name);
+    boolean add(Department department);
 
-    boolean update(Integer id, String name);
+    boolean update(Department department);
 
-    boolean delete(Integer id);
+    boolean deleteById(Integer id);
 }

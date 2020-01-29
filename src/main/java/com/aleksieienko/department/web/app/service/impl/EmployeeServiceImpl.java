@@ -3,9 +3,6 @@ package com.aleksieienko.department.web.app.service.impl;
 import com.aleksieienko.department.web.app.db.dao.EmployeeDao;
 import com.aleksieienko.department.web.app.entity.Employee;
 import com.aleksieienko.department.web.app.service.EmployeeService;
-import com.aleksieienko.department.web.app.service.Patterns;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,28 +18,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee get(Integer id) {
-        return employeeDao.get(id);
+    public Employee getById(Integer id) {
+        return employeeDao.getById(id);
     }
 
     @Override
-    public List<Employee> getForDepartment(Integer id) {
-        return employeeDao.getForDepartment(id);
+    public List<Employee> getByDepartmentId(Integer id) {
+        return employeeDao.getByDepartmentId(id);
     }
 
     @Override
-    public boolean add(String email, String name,
-                       LocalDate birthday, Integer payment, Integer departmentId) {
-        Employee employee = new Employee();
-        employee.setEmail(email);
-        employee.setName(name);
-        employee.setBirthday(birthday);
-        employee.setPayment(payment);
-        employee.setDepartmentId(departmentId);
-        if (employee.getEmail().matches(Patterns.EMPLOYEE_EMAIL_PATTERN)
-                && employee.getName().matches(Patterns.EMPLOYEE_NAME_PATTERN)
-                && employee.getEmail().length() <= 255
-                && employee.getBirthday().isBefore(LocalDate.now())) {
+    public boolean add(Employee employee) {
+        if (employee.isValid()) {
             return employeeDao.add(employee);
         } else {
             return false;
@@ -50,19 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean update(Integer id, String email, String name,
-                          LocalDate birthday, Integer payment, Integer departmentId) {
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setEmail(email);
-        employee.setName(name);
-        employee.setBirthday(birthday);
-        employee.setPayment(payment);
-        employee.setDepartmentId(departmentId);
-        if (employee.getEmail().matches(Patterns.EMPLOYEE_EMAIL_PATTERN)
-                && employee.getName().matches(Patterns.EMPLOYEE_NAME_PATTERN)
-                && employee.getEmail().length() <= 255
-                && employee.getBirthday().isBefore(LocalDate.now())) {
+    public boolean update(Employee employee) {
+        if (employee.isValid()) {
             return employeeDao.update(employee);
         } else {
             return false;
@@ -70,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return employeeDao.delete(id);
+    public boolean deleteById(Integer id) {
+        return employeeDao.deleteById(id);
     }
 }

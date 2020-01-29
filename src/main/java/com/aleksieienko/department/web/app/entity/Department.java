@@ -1,5 +1,7 @@
 package com.aleksieienko.department.web.app.entity;
 
+import com.aleksieienko.department.web.app.service.Patterns;
+
 public class Department {
     private Integer id;
     private String name;
@@ -26,5 +28,9 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isValid() {
+        return name.matches(Patterns.DEPARTMENT_NAME_PATTERN);
     }
 }

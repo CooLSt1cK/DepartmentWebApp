@@ -1,19 +1,27 @@
 package com.aleksieienko.department.web.app.web.servlet.department;
 
 import com.aleksieienko.department.web.app.Paths;
+import com.aleksieienko.department.web.app.entity.Department;
 import com.aleksieienko.department.web.app.service.DepartmentService;
 import com.aleksieienko.department.web.app.web.AttributeNames;
-
+import com.aleksieienko.department.web.app.web.ParameterNames;
+import java.io.IOException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/AddDepartment")
+@WebServlet(name = "AddDepartmentServlet", value = "/AddDepartment")
 public class AddDepartmentServlet extends HttpServlet {
-    private DepartmentService departmentService = (DepartmentService) getServletContext().getAttribute(AttributeNames.DEPARTMENT_SERVICE);
+    private DepartmentService departmentService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        departmentService = (DepartmentService) config.getServletContext().getAttribute(AttributeNames.DEPARTMENT_SERVICE);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,11 +29,16 @@ public class AddDepartmentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter("name");
-        if (!departmentService.add(name)) {
-            req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
-            resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String name = req.getParameter(ParameterNames.NAME);
+
+        Department department = new Department();
+        department.setName(name);
+
+        if (!departmentService.add(department)) {
+            req.setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
+            req.setAttribute(AttributeNames.DEPARTMENT_WITHOUT_ID, department);
+            req.getRequestDispatcher(Paths.ADD_DEPARTMENT_JSP).forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }

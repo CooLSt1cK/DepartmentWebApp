@@ -4,35 +4,47 @@ import com.aleksieienko.department.web.app.Paths;
 import com.aleksieienko.department.web.app.entity.Department;
 import com.aleksieienko.department.web.app.service.DepartmentService;
 import com.aleksieienko.department.web.app.web.AttributeNames;
-
+import com.aleksieienko.department.web.app.web.ParameterNames;
+import java.io.IOException;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/UpdateDepartment")
+@WebServlet(name = "UpdateDepartmentServlet", value = "/UpdateDepartment")
 public class UpdateDepartmentServlet extends HttpServlet {
-    private DepartmentService departmentService = (DepartmentService) getServletContext().getAttribute(AttributeNames.DEPARTMENT_SERVICE);
+    private DepartmentService departmentService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        departmentService = (DepartmentService) config.getServletContext().getAttribute(AttributeNames.DEPARTMENT_SERVICE);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        Department department = departmentService.get(id);
-        req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
+        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Department department = departmentService.getById(id);
+        req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
         req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        if (!departmentService.update(id, name)) {
-            req.getSession().setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
-            resp.sendRedirect(req.getContextPath() + Paths.ERROR_CONTROLLER);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        String name = req.getParameter(ParameterNames.NAME);
+
+        Department department = new Department();
+        department.setId(id);
+        department.setName(name);
+
+        if (!departmentService.update(department)) {
+            req.setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
+            req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
+            req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);
         } else {
-            req.getSession().setAttribute(AttributeNames.DEPARTMENT_BY_ID, null);
             resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
     }

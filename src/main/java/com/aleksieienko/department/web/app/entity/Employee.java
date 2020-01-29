@@ -1,5 +1,6 @@
 package com.aleksieienko.department.web.app.entity;
 
+import com.aleksieienko.department.web.app.service.Patterns;
 import java.time.LocalDate;
 
 public class Employee {
@@ -71,5 +72,18 @@ public class Employee {
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public boolean isValid() {
+        return email.matches(Patterns.EMPLOYEE_EMAIL_PATTERN)
+                && name.matches(Patterns.EMPLOYEE_NAME_PATTERN)
+                && email.length() <= 255
+                && isEighteen();
+    }
+
+    private boolean isEighteen() {
+        LocalDate localDate = LocalDate.now();
+        localDate = localDate.minusYears(18);
+        return birthday.isBefore(localDate);
     }
 }
