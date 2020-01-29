@@ -5,6 +5,7 @@ import com.aleksieienko.department.web.app.entity.Department;
 import com.aleksieienko.department.web.app.service.DepartmentService;
 import com.aleksieienko.department.web.app.web.AttributeNames;
 import com.aleksieienko.department.web.app.web.ParameterNames;
+import com.aleksieienko.department.web.app.web.servlet.ErrorMessages;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -41,7 +42,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
         department.setName(name);
 
         if (!departmentService.update(department)) {
-            req.setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or department's name like this already exist");
+            req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_DEPARTMENT);
             req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
             req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);
         } else {

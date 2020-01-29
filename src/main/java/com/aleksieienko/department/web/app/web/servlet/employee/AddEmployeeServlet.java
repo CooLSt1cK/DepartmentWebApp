@@ -5,6 +5,7 @@ import com.aleksieienko.department.web.app.entity.Employee;
 import com.aleksieienko.department.web.app.service.EmployeeService;
 import com.aleksieienko.department.web.app.web.AttributeNames;
 import com.aleksieienko.department.web.app.web.ParameterNames;
+import com.aleksieienko.department.web.app.web.servlet.ErrorMessages;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.ServletConfig;
@@ -47,7 +48,7 @@ public class AddEmployeeServlet extends HttpServlet {
         employee.setDepartmentId(departmentId);
 
         if (!employeeService.add(employee)) {
-            req.setAttribute(AttributeNames.ERROR_MESSAGE, "Not valid or employee's email like this already exist");
+            req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_EMPLOYEE);
             req.setAttribute(AttributeNames.EMPLOYEE_WITHOUT_ID, employee);
             req.setAttribute(AttributeNames.DEPARTMENT_ID, departmentId);
             req.getRequestDispatcher(Paths.ADD_EMPLOYEE_JSP).forward(req, resp);
