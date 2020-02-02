@@ -36,11 +36,13 @@ public class ContextListener implements ServletContextListener {
             String user = properties.getProperty(PropertyNames.DB_SETTING_USER);
             String password = properties.getProperty(PropertyNames.DB_SETTING_PASSWORD);
             DBManager dbManager = new DBManager(url, user, password);
+
             //Department service
             DepartmentDao departmentDao = new DepartmentDaoImpl(dbManager);
             DepartmentService departmentService = new DepartmentServiceImpl(departmentDao);
             sce.getServletContext().setAttribute(AttributeNames.DEPARTMENT_LIST, departmentService.getAll());
             sce.getServletContext().setAttribute(AttributeNames.DEPARTMENT_SERVICE, departmentService);
+
             //Employee service
             EmployeeDao employeeDao = new EmployeeDaoImpl(dbManager);
             EmployeeService employeeService = new EmployeeServiceImpl(employeeDao);
