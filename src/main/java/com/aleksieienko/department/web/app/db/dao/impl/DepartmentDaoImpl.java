@@ -26,7 +26,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         Connection con = dbManager.getConnection();
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(Constants.SQL_SELECT_DEPARTMENT)) {
             while (rs.next()) {
-                list.add(DepartmentMapper.mapRow(rs));
+                list.add(mapRow(rs));
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
@@ -45,7 +45,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 rs.next();
-                department = DepartmentMapper.mapRow(rs);
+                department = mapRow(rs);
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
@@ -108,16 +108,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return res;
     }
 
-    private static class DepartmentMapper {
-        private static Department mapRow(ResultSet rs) {
-            try {
-                Department department = new Department();
-                department.setId(rs.getInt(Fields.DEPARTMENT_ID));
-                department.setName(rs.getString(Fields.DEPARTMENT_NAME));
-                return department;
-            } catch (SQLException e) {
-                throw new IllegalStateException(e);
-            }
+    private static Department mapRow(ResultSet rs) {
+        try {
+            Department department = new Department();
+            department.setId(rs.getInt(Fields.DEPARTMENT_ID));
+            department.setName(rs.getString(Fields.DEPARTMENT_NAME));
+            return department;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
         }
     }
 }

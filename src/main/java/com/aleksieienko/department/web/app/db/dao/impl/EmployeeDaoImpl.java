@@ -28,7 +28,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(Constants.SQL_SELECT_EMPLOYEE)) {
             while (rs.next()) {
-                list.add(EmployeeMapping.mapRow(rs));
+                list.add(mapRow(rs));
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
@@ -47,7 +47,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 rs.next();
-                employee = EmployeeMapping.mapRow(rs);
+                employee = mapRow(rs);
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
@@ -66,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    list.add(EmployeeMapping.mapRow(rs));
+                    list.add(mapRow(rs));
                 }
             }
         } catch (SQLException ex) {
@@ -138,20 +138,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return res;
     }
 
-    private static class EmployeeMapping {
-        private static Employee mapRow(ResultSet rs) {
-            try {
-                Employee employee = new Employee();
-                employee.setId(rs.getInt(Fields.EMPLOYEE_ID));
-                employee.setEmail(rs.getString(Fields.EMPLOYEE_EMAIL));
-                employee.setName(rs.getString(Fields.EMPLOYEE_NAME));
-                employee.setBirthday(rs.getDate(Fields.EMPLOYEE_BIRTHDAY).toLocalDate());
-                employee.setPayment(rs.getInt(Fields.EMPLOYEE_PAYMENT));
-                employee.setDepartmentId(rs.getInt(Fields.EMPLOYEE_DEPARTMENT_ID));
-                return employee;
-            } catch (SQLException e) {
-                throw new IllegalStateException(e);
-            }
+    private static Employee mapRow(ResultSet rs) {
+        try {
+            Employee employee = new Employee();
+            employee.setId(rs.getInt(Fields.EMPLOYEE_ID));
+            employee.setEmail(rs.getString(Fields.EMPLOYEE_EMAIL));
+            employee.setName(rs.getString(Fields.EMPLOYEE_NAME));
+            employee.setBirthday(rs.getDate(Fields.EMPLOYEE_BIRTHDAY).toLocalDate());
+            employee.setPayment(rs.getInt(Fields.EMPLOYEE_PAYMENT));
+            employee.setDepartmentId(rs.getInt(Fields.EMPLOYEE_DEPARTMENT_ID));
+            return employee;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
         }
     }
 }
