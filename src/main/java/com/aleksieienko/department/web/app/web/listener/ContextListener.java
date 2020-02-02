@@ -29,8 +29,7 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try {
-            FileInputStream fis = new FileInputStream(Paths.DB_SETTINGS);
+        try (FileInputStream fis = new FileInputStream(Paths.DB_SETTINGS)) {
             Properties properties = new Properties();
             properties.load(fis);
             String url = properties.getProperty(PropertyNames.DB_SETTING_URL);
