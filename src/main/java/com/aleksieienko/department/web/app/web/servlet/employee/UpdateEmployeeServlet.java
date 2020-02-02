@@ -53,13 +53,13 @@ public class UpdateEmployeeServlet extends HttpServlet {
 
         Integer oldDepartmentId = Integer.parseInt(req.getParameter(AttributeNames.EMPLOYEE_DEPARTMENT_ID));
 
-        if (!employeeService.update(employee)) {
+        if (employeeService.update(employee)) {
+            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?id=" + oldDepartmentId);
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_EMPLOYEE);
             req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
             req.setAttribute(AttributeNames.EMPLOYEE_DEPARTMENT_ID, oldDepartmentId);
             req.getRequestDispatcher(Paths.UPDATE_EMPLOYEE_JSP).forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?id=" + oldDepartmentId);
         }
     }
 }

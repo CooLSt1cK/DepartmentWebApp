@@ -47,13 +47,13 @@ public class AddEmployeeServlet extends HttpServlet {
         employee.setPayment(payment);
         employee.setDepartmentId(departmentId);
 
-        if (!employeeService.add(employee)) {
+        if (employeeService.add(employee)) {
+            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + departmentId);
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_EMPLOYEE);
             req.setAttribute(AttributeNames.EMPLOYEE_WITHOUT_ID, employee);
             req.setAttribute(AttributeNames.DEPARTMENT_ID, departmentId);
             req.getRequestDispatcher(Paths.ADD_EMPLOYEE_JSP).forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + departmentId);
         }
     }
 }

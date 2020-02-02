@@ -41,12 +41,12 @@ public class UpdateDepartmentServlet extends HttpServlet {
         department.setId(id);
         department.setName(name);
 
-        if (!departmentService.update(department)) {
+        if (departmentService.update(department)) {
+            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_DEPARTMENT);
             req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
             req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
     }
 }

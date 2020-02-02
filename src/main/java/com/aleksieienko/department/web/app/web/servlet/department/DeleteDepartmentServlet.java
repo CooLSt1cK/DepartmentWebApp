@@ -35,11 +35,11 @@ public class DeleteDepartmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
-        if (!departmentService.deleteById(id)) {
+        if (departmentService.deleteById(id)) {
+            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_DELETE_DEPARTMENT);
             resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + Paths.DEPARTMENT_SERVLET));
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
     }
 }

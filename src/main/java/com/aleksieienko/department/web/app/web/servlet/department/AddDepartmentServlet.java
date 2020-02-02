@@ -36,12 +36,12 @@ public class AddDepartmentServlet extends HttpServlet {
         Department department = new Department();
         department.setName(name);
 
-        if (!departmentService.add(department)) {
+        if (departmentService.add(department)) {
+            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_DEPARTMENT);
             req.setAttribute(AttributeNames.DEPARTMENT_WITHOUT_ID, department);
             req.getRequestDispatcher(Paths.ADD_DEPARTMENT_JSP).forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         }
     }
 }

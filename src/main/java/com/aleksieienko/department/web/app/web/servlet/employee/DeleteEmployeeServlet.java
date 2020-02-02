@@ -36,11 +36,11 @@ public class DeleteEmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
-        if (!employeeService.deleteById(id)) {
+        if (employeeService.deleteById(id)) {
+            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID));
+        } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_DELETE_EMPLOYEE);
             resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID)));
-        } else {
-            resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID));
         }
     }
 }
