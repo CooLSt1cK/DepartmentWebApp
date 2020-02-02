@@ -1,10 +1,10 @@
-<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
+<jsp:include file="/WEB-INF/jspf/taglib.jspf" %>
 <html>
 <c:set var="title" value="Delete department" scope="page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<jsp:include file="/WEB-INF/jspf/head.jspf" %>
     <body>
        
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<jsp:include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
             <form action="UpdateDepartment" method="POST">
             <c:if test="${not empty errorMessage}"><p class="text-danger"><c:out value="${errorMessage}"/></p></c:if>
@@ -19,6 +19,6 @@
                 </div>
       </form>
         </div>
-        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+        <jsp:include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>

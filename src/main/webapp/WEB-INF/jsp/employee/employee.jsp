@@ -1,11 +1,11 @@
-<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
+<jsp:include file="/WEB-INF/jspf/taglib.jspf" %>
 <html>
 <c:set var="title" value="Employee list for ${departmentById.name}" scope="page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<jsp:include file="/WEB-INF/jspf/head.jspf" %>
 
     <body>
         
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<jsp:include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
         <c:if test="${not empty errorMessage}"><p class="text-danger"><c:out value="${errorMessage}"/></p></c:if>
             <table class="table">
@@ -39,6 +39,6 @@
             </table>
             <a href="AddEmployee?departmentId=<c:out value="${departmentById.id}"/>" class="btn btn-primary btn-block">Add</a href="#add">
         </div>
-        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+        <jsp:include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>
