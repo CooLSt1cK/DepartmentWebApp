@@ -138,7 +138,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return res;
     }
 
-    private static Employee mapRow(ResultSet rs) {
+    private Employee mapRow(ResultSet rs) {
         try {
             Employee employee = new Employee();
             employee.setId(rs.getInt(Fields.EMPLOYEE_ID));

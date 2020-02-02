@@ -108,7 +108,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return res;
     }
 
-    private static Department mapRow(ResultSet rs) {
+    private Department mapRow(ResultSet rs) {
         try {
             Department department = new Department();
             department.setId(rs.getInt(Fields.DEPARTMENT_ID));
