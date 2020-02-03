@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="birthday" class="col-form-label">Birthday</label>
-                <input type="date" class="form-control" max="<%= LocalDate.now().minusYears(18) %>" value="<c:out value="${employeeById.birthday}"/>" id="birthday" name="birthday" required>
+                <input type="date" class="form-control" max="<c:out value="<%= LocalDate.now().minusYears(18) %>"/>" value="<c:out value="${employeeById.birthday}"/>" id="birthday" name="birthday" required>
             </div>
             <div class="form-group">
                 <label for="payment" class="col-form-label">Payment</label>
@@ -36,7 +36,7 @@
                 <label for="departmentId" class="col-form-label">Department</label>
                 <select class="form-control" id="departmentId" name="departmentId" required>
                     <c:forEach var="e" items="${departmentList}">
-                    <option value="${e.id}" <c:if test="${e.id == employeeById.departmentId}">selected</c:if>>${e.name}</option>
+                    <option value="${e.id}" <c:if test="${e.id == employeeById.departmentId}">selected</c:if>><c:out value="${e.name}"/></option>
                     </c:forEach>
                 </select>
             </div>
