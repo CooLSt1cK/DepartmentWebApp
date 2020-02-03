@@ -1,10 +1,10 @@
-<jsp:include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
 <html>
 <c:set var="title" value="Delete employee" scope="page" />
-<jsp:include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
     <body>
        
-<jsp:include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
             <table class="table">
                 <thead class="thead-light">
@@ -34,6 +34,6 @@
                   </div>
         </form>
         </div>
-        <jsp:include file="/WEB-INF/jspf/footer.jspf" %>
+        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>

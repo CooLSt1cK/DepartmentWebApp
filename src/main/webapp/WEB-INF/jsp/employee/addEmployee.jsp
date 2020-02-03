@@ -1,11 +1,11 @@
-<jsp:include file="/WEB-INF/jspf/taglib.jspf" %>
-<jsp:page import = "java.time.LocalDate" %>
+<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ page import = "java.time.LocalDate" %>
 <html>
 <c:set var="title" value="Add employee for ${departmentById.name}" scope="page" />
-<jsp:include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
     <body>
        
-<jsp:include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
         <form action="AddEmployee" method="POST">
         <input type="hidden" name="departmentId" value="<c:out value="${departmentId}"/>"/>
@@ -37,6 +37,6 @@
                   </div>
         </form>
         </div>
-        <jsp:include file="/WEB-INF/jspf/footer.jspf" %>
+        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>

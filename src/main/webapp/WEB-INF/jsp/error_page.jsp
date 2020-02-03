@@ -1,10 +1,10 @@
-<jsp:include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
 <html>
 <c:set var="title" value="Error page" scope="page" />
-<jsp:include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
 
     <body>
-        <jsp:include file="/WEB-INF/jspf/header.jspf" %>
+        <%@ include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
         <div class="d-flex justify-content-center">
             <div class="lead md-3"><svg width="60" height="53" viewBox="0 0 60 53" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,6 +43,6 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M50 5.71875L16.6667 36.2188L0 20.9688L6.25 15.25L16.6667 24.7813L43.75 0L50 5.71875V5.71875Z" fill="white"/>
                 </svg></a>
                 </div>
-                <jsp:include file="/WEB-INF/jspf/footer.jspf" %>
+                <%@ include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>
