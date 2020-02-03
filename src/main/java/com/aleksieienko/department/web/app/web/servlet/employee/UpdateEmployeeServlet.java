@@ -14,10 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 @WebServlet(name = "UpdateEmployeeServlet", value = "/UpdateEmployee")
 public class UpdateEmployeeServlet extends HttpServlet {
     private EmployeeService employeeService;
+
+    private static final Logger LOG = Logger.getLogger(UpdateEmployeeServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {

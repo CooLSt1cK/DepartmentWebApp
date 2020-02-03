@@ -2,14 +2,12 @@ package com.aleksieienko.department.web.app;
 
 public class Paths {
     public static final String DB_SETTINGS = "src/main/resources/db_settings.property";
+    public static final String LOG4J_PROPERTIES = "../resources/log4j.properties";
 
     public static final String ADD_DEPARTMENT_JSP = "/WEB-INF/jsp/department/addDepartment.jsp";
     public static final String DELETE_DEPARTMENT_JSP = "/WEB-INF/jsp/department/deleteDepartment.jsp";
     public static final String UPDATE_DEPARTMENT_JSP = "/WEB-INF/jsp/department/updateDepartment.jsp";
     public static final String DEPARTMENT_SERVLET = "/DepartmentServlet";
-
-    public static final String ERROR_PAGE_JSP = "/WEB-INF/jsp/error_page.jsp";
-    public static final String ERROR_CONTROLLER = "/ErrorPage";
 
     public static final String INDEX_JSP = "/index.jsp";
 

@@ -16,6 +16,7 @@ public class Constants {
     public static final String SQL_DELETE_EMPLOYEE = "DELETE FROM employee WHERE id = ?";
     public static final String SQL_SELECT_EMPLOYEE_BY_ID = "SELECT * FROM employee WHERE id = ?";
 
+    public static final String QUERY_ERROR_MESSAGE = "Query error message: ";
 
     private Constants() {
     }

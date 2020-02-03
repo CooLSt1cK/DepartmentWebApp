@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class EmployeeDaoImpl implements EmployeeDao {
     private DBManager dbManager;
+    private static final Logger LOG = Logger.getLogger(EmployeeDaoImpl.class);
 
     public EmployeeDaoImpl(DBManager dbManager) {
         this.dbManager = dbManager;
@@ -32,7 +34,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -51,7 +53,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -71,7 +73,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -91,7 +93,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             stmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -113,7 +115,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -130,7 +132,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);

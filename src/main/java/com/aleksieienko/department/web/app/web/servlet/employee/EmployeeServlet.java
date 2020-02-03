@@ -15,11 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 @WebServlet(name = "EmployeeServlet", value = "/EmployeeServlet")
 public class EmployeeServlet extends HttpServlet {
     private EmployeeService employeeService;
     private DepartmentService departmentService;
+
+    private static final Logger LOG = Logger.getLogger(EmployeeServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -33,7 +36,9 @@ public class EmployeeServlet extends HttpServlet {
             throws IOException, ServletException {
         Integer id = Integer.parseInt(request.getParameter(ParameterNames.ID));
         List<Employee> list = employeeService.getByDepartmentId(id);
+        LOG.trace("Got employees' list from database: list --> " + list);
         Department department = departmentService.getById(id);
+        LOG.trace("Got department from database by id: department --> " + department);
         request.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
         request.setAttribute(AttributeNames.EMPLOYEE_LIST, list);
         request.getRequestDispatcher(Paths.EMPLOYEE_JSP).forward(request, response);

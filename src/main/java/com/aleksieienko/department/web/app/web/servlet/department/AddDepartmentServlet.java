@@ -13,10 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 @WebServlet(name = "AddDepartmentServlet", value = "/AddDepartment")
 public class AddDepartmentServlet extends HttpServlet {
     private DepartmentService departmentService;
+
+    private static final Logger LOG = Logger.getLogger(AddDepartmentServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -37,6 +40,7 @@ public class AddDepartmentServlet extends HttpServlet {
         department.setName(name);
 
         if (departmentService.add(department)) {
+
             resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         } else {
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_DEPARTMENT);

@@ -3,8 +3,12 @@ package com.aleksieienko.department.web.app.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class DBManager {
+
+    private static final Logger LOG = Logger.getLogger(DBManager.class);
+
     private String url;
     private String userName;
     private String password;
@@ -20,7 +24,7 @@ public class DBManager {
             con.rollback();
             con.close();
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            LOG.error("Cannot rollback or close connection");
         }
     }
 
@@ -29,7 +33,7 @@ public class DBManager {
             con.commit();
             con.close();
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            LOG.error("Cannot commit or close connection");
         }
     }
 
@@ -39,7 +43,7 @@ public class DBManager {
             con = DriverManager.getConnection(url, userName, password);
             con.setAutoCommit(false);
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            LOG.error("Cannot get connection");
         }
         return con;
     }

@@ -12,9 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class DepartmentDaoImpl implements DepartmentDao {
     private DBManager dbManager;
+    private static final Logger LOG = Logger.getLogger(DepartmentDaoImpl.class);
 
     public DepartmentDaoImpl(DBManager dbManager) {
         this.dbManager = dbManager;
@@ -30,7 +32,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -49,7 +51,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -65,7 +67,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             stmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -83,7 +85,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -100,7 +102,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            System.err.println(ex.getMessage());
+            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
