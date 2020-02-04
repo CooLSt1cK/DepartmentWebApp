@@ -62,8 +62,4 @@ public class ContextListener implements ServletContextListener {
             LOG.error("Opening db_settings error");
         }
     }
-
-    private void initLog4J(ServletContext servletContext) {
-
-    }
 }
