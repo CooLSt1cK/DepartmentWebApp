@@ -31,6 +31,7 @@ public class DeleteDepartmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         Department department = departmentService.getById(id);
+        LOG.debug("Got department by id from database: department --> " + department);
         req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
         req.getRequestDispatcher(Paths.DELETE_DEPARTMENT_JSP).forward(req, resp);
     }
@@ -39,8 +40,10 @@ public class DeleteDepartmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         if (departmentService.deleteById(id)) {
+            LOG.debug("Deleted department with id: id --> " + id);
             resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         } else {
+            LOG.debug("Can't delete department with id: id --> " + id);
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_DELETE_DEPARTMENT);
             resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + Paths.DEPARTMENT_SERVLET));
         }

@@ -51,8 +51,10 @@ public class AddEmployeeServlet extends HttpServlet {
         employee.setDepartmentId(departmentId);
 
         if (employeeService.add(employee)) {
+            LOG.debug("Added employee: employee --> " + employee);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + departmentId);
         } else {
+            LOG.debug("Can't add employee: employee --> " + employee);
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_EMPLOYEE);
             req.setAttribute(AttributeNames.EMPLOYEE_WITHOUT_ID, employee);
             req.setAttribute(AttributeNames.DEPARTMENT_ID, departmentId);

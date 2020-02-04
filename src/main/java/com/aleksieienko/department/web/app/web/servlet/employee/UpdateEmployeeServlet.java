@@ -32,6 +32,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         Employee employee = employeeService.getById(id);
+        LOG.debug("Got employee by id: employee --> " + employee);
         req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
         req.setAttribute(AttributeNames.EMPLOYEE_DEPARTMENT_ID, employee.getDepartmentId());
         req.getRequestDispatcher(Paths.UPDATE_EMPLOYEE_JSP).forward(req, resp);
@@ -57,8 +58,10 @@ public class UpdateEmployeeServlet extends HttpServlet {
         Integer oldDepartmentId = Integer.parseInt(req.getParameter(AttributeNames.EMPLOYEE_DEPARTMENT_ID));
 
         if (employeeService.update(employee)) {
+            LOG.debug("Updated employee: employee --> " + employee);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?id=" + oldDepartmentId);
         } else {
+            LOG.debug("Can't update employee: employee --> " + employee);
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_EMPLOYEE);
             req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
             req.setAttribute(AttributeNames.EMPLOYEE_DEPARTMENT_ID, oldDepartmentId);

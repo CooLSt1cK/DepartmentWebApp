@@ -31,6 +31,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         Employee employee = employeeService.getById(id);
+        LOG.debug("Got employee by id from database: employee --> " + employee);
         req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
         req.setAttribute(AttributeNames.DEPARTMENT_ID, employee.getDepartmentId());
         req.getRequestDispatcher(Paths.DELETE_EMPLOYEE_JSP).forward(req, resp);
@@ -40,8 +41,10 @@ public class DeleteEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         if (employeeService.deleteById(id)) {
+            LOG.debug("Deleted employee with id: id --> " + id);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID));
         } else {
+            LOG.debug("Can't delete employee with id: id --> " + id);
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_DELETE_EMPLOYEE);
             resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID)));
         }

@@ -36,9 +36,9 @@ public class EmployeeServlet extends HttpServlet {
             throws IOException, ServletException {
         Integer id = Integer.parseInt(request.getParameter(ParameterNames.ID));
         List<Employee> list = employeeService.getByDepartmentId(id);
-        LOG.trace("Got employees' list from database: list --> " + list);
+        LOG.debug("Got employees' list from database: list --> " + list);
         Department department = departmentService.getById(id);
-        LOG.trace("Got department from database by id: department --> " + department);
+        LOG.debug("Got department from database by id: department --> " + department);
         request.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
         request.setAttribute(AttributeNames.EMPLOYEE_LIST, list);
         request.getRequestDispatcher(Paths.EMPLOYEE_JSP).forward(request, response);

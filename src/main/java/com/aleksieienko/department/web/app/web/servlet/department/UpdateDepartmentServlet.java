@@ -31,6 +31,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
         Department department = departmentService.getById(id);
+        LOG.debug("Got department by id from database: department --> " + department);
         req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
         req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);
     }
@@ -45,8 +46,10 @@ public class UpdateDepartmentServlet extends HttpServlet {
         department.setName(name);
 
         if (departmentService.update(department)) {
+            LOG.debug("Updated department: department --> " + department);
             resp.sendRedirect(req.getContextPath() + Paths.DEPARTMENT_SERVLET);
         } else {
+            LOG.debug("Can't update department: department --> " + department);
             req.setAttribute(AttributeNames.ERROR_MESSAGE, ErrorMessages.ERROR_ADD_OR_UPDATE_DEPARTMENT);
             req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
             req.getRequestDispatcher(Paths.UPDATE_DEPARTMENT_JSP).forward(req, resp);

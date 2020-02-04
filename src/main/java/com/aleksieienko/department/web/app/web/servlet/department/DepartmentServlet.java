@@ -30,8 +30,8 @@ public class DepartmentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         List<Department> list = departmentService.getAll();
-        LOG.trace("Got departments' list from database: list --> " + list);
-        LOG.trace("Set attribute to context: " + AttributeNames.DEPARTMENT_LIST + " --> " + list);
+        LOG.debug("Got departments' list from database: list --> " + list);
+        LOG.debug("Set attribute to context: " + AttributeNames.DEPARTMENT_LIST + " --> " + list);
         request.getServletContext().setAttribute(AttributeNames.DEPARTMENT_LIST, list);
         response.sendRedirect(request.getContextPath() + Paths.INDEX_JSP);
     }
