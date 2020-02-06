@@ -14,6 +14,7 @@ public class AttributeNames {
     public static final String EMPLOYEE_WITHOUT_ID = "employeeWithoutId";
 
     public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String OLDER_THEN = "olderThen";
 
     private AttributeNames() {
     }

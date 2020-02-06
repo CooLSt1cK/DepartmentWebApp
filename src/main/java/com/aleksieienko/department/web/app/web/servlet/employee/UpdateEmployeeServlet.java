@@ -34,6 +34,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
         Employee employee = employeeService.getById(id);
         LOG.debug("Got employee by id: employee --> " + employee);
         req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
+        req.setAttribute(AttributeNames.OLDER_THEN, LocalDate.now().minusYears(18));
         req.setAttribute(AttributeNames.EMPLOYEE_DEPARTMENT_ID, employee.getDepartmentId());
         req.getRequestDispatcher(Paths.UPDATE_EMPLOYEE_JSP).forward(req, resp);
     }

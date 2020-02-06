@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="birthday" class="col-form-label">Birthday</label>
-                <input type="date" class="form-control" max="<c:out value="<%= LocalDate.now().minusYears(18) %>"/>" value="<c:out value="${employeeWithoutId.birthday}"/>" id="birthday" name="birthday" required>
+                <input type="date" class="form-control" max="<c:out value="${olderThen}"/>" value="<c:out value="${employeeWithoutId.birthday}"/>" id="birthday" name="birthday" required>
             </div>
             <div class="form-group">
                 <label for="payment" class="col-form-label">Payment</label>

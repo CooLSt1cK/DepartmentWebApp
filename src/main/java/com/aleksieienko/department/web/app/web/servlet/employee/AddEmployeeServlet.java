@@ -31,6 +31,7 @@ public class AddEmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer departmentId = Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID));
+        req.setAttribute(AttributeNames.OLDER_THEN, LocalDate.now().minusYears(18));
         req.setAttribute(AttributeNames.DEPARTMENT_ID, departmentId);
         req.getRequestDispatcher(Paths.ADD_EMPLOYEE_JSP).forward(req, resp);
     }
