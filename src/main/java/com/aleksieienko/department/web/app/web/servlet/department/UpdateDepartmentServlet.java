@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aleksieienko.department.web.app.web.servlet.ParameterPatterns;
 import org.apache.log4j.Logger;
 
 @WebServlet(name = "UpdateDepartmentServlet", value = "/UpdateDepartment")
@@ -29,7 +31,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Integer id = (req.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.ID))):(null);
         Department department = departmentService.getById(id);
         LOG.debug("Got department by id from database: department --> " + department);
         req.setAttribute(AttributeNames.DEPARTMENT_BY_ID, department);
@@ -38,7 +40,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Integer id = (req.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.ID))):(null);
         String name = req.getParameter(ParameterNames.NAME);
 
         Department department = new Department();

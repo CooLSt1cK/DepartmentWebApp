@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aleksieienko.department.web.app.web.servlet.ParameterPatterns;
 import org.apache.log4j.Logger;
 
 @WebServlet(name = "DeleteEmployeeServlet", value = "/DeleteEmployee")
@@ -29,7 +31,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Integer id = (req.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.ID))):(null);
         Employee employee = employeeService.getById(id);
         LOG.debug("Got employee by id from database: employee --> " + employee);
         req.setAttribute(AttributeNames.EMPLOYEE_BY_ID, employee);
@@ -39,7 +41,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Integer id = (req.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.ID))):(null);
         if (employeeService.deleteById(id)) {
             LOG.debug("Deleted employee with id: id --> " + id);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + req.getParameter(ParameterNames.DEPARTMENT_ID));

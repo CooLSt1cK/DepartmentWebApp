@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aleksieienko.department.web.app.web.servlet.ParameterPatterns;
 import org.apache.log4j.Logger;
 
 @WebServlet(name = "UpdateEmployeeServlet", value = "/UpdateEmployee")
@@ -41,12 +43,12 @@ public class UpdateEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Integer id = Integer.parseInt(req.getParameter(ParameterNames.ID));
+        Integer id = (req.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.ID))):(null);
         String email = req.getParameter(ParameterNames.EMAIL);
         String name = req.getParameter(ParameterNames.NAME);
-        LocalDate birthday = LocalDate.parse(req.getParameter(ParameterNames.BIRTHDAY));
-        Integer payment = Integer.parseInt(req.getParameter(ParameterNames.PAYMENT));
-        Integer departmentId = Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID));
+        LocalDate birthday = (req.getParameter(ParameterNames.BIRTHDAY).matches(ParameterPatterns.DATE_PATTERN))?(LocalDate.parse(req.getParameter(ParameterNames.BIRTHDAY))):(null);
+        Integer payment = (req.getParameter(ParameterNames.PAYMENT).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.PAYMENT))):(null);
+        Integer departmentId = (req.getParameter(ParameterNames.DEPARTMENT_ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID))):(null);
 
         Employee employee = new Employee();
         employee.setId(id);
@@ -56,9 +58,11 @@ public class UpdateEmployeeServlet extends HttpServlet {
         employee.setPayment(payment);
         employee.setDepartmentId(departmentId);
 
-        Integer oldDepartmentId = Integer.parseInt(req.getParameter(AttributeNames.EMPLOYEE_DEPARTMENT_ID));
+        Integer oldDepartmentId = (req.getParameter(AttributeNames.EMPLOYEE_DEPARTMENT_ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(AttributeNames.EMPLOYEE_DEPARTMENT_ID))):(null);
 
-        if (employeeService.update(employee)) {
+        if (employee.getDepartmentId() != null
+                && employee.getPayment() != null
+                && employeeService.update(employee)) {
             LOG.debug("Updated employee: employee --> " + employee);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?id=" + oldDepartmentId);
         } else {

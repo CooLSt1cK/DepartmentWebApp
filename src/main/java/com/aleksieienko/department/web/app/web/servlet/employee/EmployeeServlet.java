@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aleksieienko.department.web.app.web.servlet.ParameterPatterns;
 import org.apache.log4j.Logger;
 
 @WebServlet(name = "EmployeeServlet", value = "/EmployeeServlet")
@@ -34,7 +36,7 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        Integer id = Integer.parseInt(request.getParameter(ParameterNames.ID));
+        Integer id = (request.getParameter(ParameterNames.ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(request.getParameter(ParameterNames.ID))):(null);
         List<Employee> list = employeeService.getByDepartmentId(id);
         LOG.debug("Got employees' list from database: list --> " + list);
         Department department = departmentService.getById(id);
