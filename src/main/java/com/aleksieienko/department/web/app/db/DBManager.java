@@ -33,7 +33,7 @@ public class DBManager {
             con.commit();
             con.close();
         } catch (SQLException ex) {
-            LOG.error("Cannot commit or close connection");
+            LOG.warn("Cannot commit or close connection");
         }
     }
 
@@ -43,7 +43,7 @@ public class DBManager {
             con = DriverManager.getConnection(url, userName, password);
             con.setAutoCommit(false);
         } catch (SQLException e) {
-            LOG.error("Cannot get connection");
+            LOG.warn("Cannot get connection");
         }
         return con;
     }

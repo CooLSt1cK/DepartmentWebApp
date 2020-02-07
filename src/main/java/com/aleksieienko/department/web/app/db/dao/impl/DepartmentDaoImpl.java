@@ -32,7 +32,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
+            LOG.warn(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -51,7 +51,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
+            LOG.warn(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
         } finally {
             dbManager.commitAndClose(con);
         }
@@ -67,7 +67,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             stmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
+            LOG.warn(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -85,7 +85,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
+            LOG.warn(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
@@ -102,7 +102,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             dbManager.rollbackAndClose(con);
-            LOG.error(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
+            LOG.warn(Constants.QUERY_ERROR_MESSAGE + ex.getMessage());
             res = false;
         } finally {
             dbManager.commitAndClose(con);
