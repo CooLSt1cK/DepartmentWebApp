@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aleksieienko.department.web.app.web.servlet.ParameterPatterns;
 import org.apache.log4j.Logger;
 
 @WebServlet(name = "AddEmployeeServlet", value = "/AddEmployee")
@@ -30,7 +32,7 @@ public class AddEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer departmentId = Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID));
+        Integer departmentId = (req.getParameter(ParameterNames.DEPARTMENT_ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID))):(null);
         req.setAttribute(AttributeNames.OLDER_THEN, LocalDate.now().minusYears(18));
         req.setAttribute(AttributeNames.DEPARTMENT_ID, departmentId);
         req.getRequestDispatcher(Paths.ADD_EMPLOYEE_JSP).forward(req, resp);
@@ -40,9 +42,9 @@ public class AddEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String email = req.getParameter(ParameterNames.EMAIL);
         String name = req.getParameter(ParameterNames.NAME);
-        LocalDate birthday = LocalDate.parse(req.getParameter(ParameterNames.BIRTHDAY));
-        Integer payment = Integer.parseInt(req.getParameter(ParameterNames.PAYMENT));
-        Integer departmentId = Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID));
+        LocalDate birthday = (req.getParameter(ParameterNames.BIRTHDAY).matches(ParameterPatterns.DATE_PATTERN))?(LocalDate.parse(req.getParameter(ParameterNames.BIRTHDAY))):(null);
+        Integer payment = (req.getParameter(ParameterNames.PAYMENT).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.PAYMENT))):(null);
+        Integer departmentId = (req.getParameter(ParameterNames.DEPARTMENT_ID).matches(ParameterPatterns.INTEGER_PATTERN))?(Integer.parseInt(req.getParameter(ParameterNames.DEPARTMENT_ID))):(null);
 
         Employee employee = new Employee();
         employee.setEmail(email);
@@ -51,7 +53,9 @@ public class AddEmployeeServlet extends HttpServlet {
         employee.setPayment(payment);
         employee.setDepartmentId(departmentId);
 
-        if (employeeService.add(employee)) {
+        if (employee.getDepartmentId() != null
+                && employee.getPayment() != null
+                && employeeService.add(employee)) {
             LOG.debug("Added employee: employee --> " + employee);
             resp.sendRedirect(req.getContextPath() + Paths.EMPLOYEE_SERVLET + "?" + ParameterNames.ID + "=" + departmentId);
         } else {
