@@ -3,7 +3,7 @@
 <c:set var="title" value="Department Web App" scope="page" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
-    <body>
+    <body class="d-flex flex-column h-100">
         <%@ include file="/WEB-INF/jspf/header.jspf" %>
         <div class="container">
         <c:if test="${not empty errorMessage}"><p class="text-danger"><c:out value="${errorMessage}"/></p></c:if>
